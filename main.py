@@ -1,21 +1,13 @@
-import json 
-from kafka import KafkaProducer
+from confluent_kafka import Producer
 
-folderName = "./"
-producer = KafkaProducer(
-    bootstrap_servers="kafka-demo-kafka-starter.f.aivencloud.com:26540",
-    security_protocol='SSL',
-    ssl_cafile=f'{folderName}/ca.pem',
-    ssl_certfile=f'{folderName}/service.cert',
-    ssl_keyfile=f'{folderName}/service.key',
-    value_serializer=lambda v: json.dumps(v).encode('ascii'),
-    key_serializer=lambda v: json.dumps(v).encode('ascii')
+producer_config = {
+    'bootstrap.servers': 'kafka-demo-kafka-starter.f.aivencloud.com:26540',
+    'security.protocol': 'SSL',
+    'ssl.ca.location': './ca.pem',
+    'ssl.certificate.location': './service.cert',
+    'ssl.key.location': './service.key',
+}
+producer = Producer(producer_config)
 
-)
-
-producer.send("test-topic",
-              key={"key":1},
-              value={"message": "hello world"}
-              )
-
+producer.produce("test-topic", key="key1", value="hello world")
 producer.flush()
