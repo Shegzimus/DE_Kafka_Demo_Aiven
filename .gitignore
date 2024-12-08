@@ -2,3 +2,5 @@ venv
 ca.pem
 service.cert
 service.key
+fake.py
+__pycache__/pizzaproducer.cpython-311.pyc
