@@ -4,3 +4,5 @@ service.cert
 service.key
 fake.py
 __pycache__/pizzaproducer.cpython-311.pyc
+
+__pycache__
