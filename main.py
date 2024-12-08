@@ -5,9 +5,13 @@ import sys
 import random
 import argparse
 from confluent_kafka import Producer
+
+
 from pizzaproducer import PizzaProvider
 from realstockproducer import RealStockProvider
 from userbehaviourproducer import UserBehaviorProvider
+from metricproducer import MetricProvider
+
 
 
 
@@ -25,7 +29,8 @@ def delivery_callback(err, msg):
     else:
         print(f'Message delivered to topic: {msg.topic()} [{msg.partition()}]')
 
-
+    
+    
 def produce_msgs(
     security_protocol="SSL",
     sasl_mechanism="SCRAM-SHA-256",
